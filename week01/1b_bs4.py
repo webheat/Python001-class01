@@ -22,11 +22,11 @@ header = {'user-agent': user_agent}
 # myurl = 'https://maoyan.com/films?showType=3'
 myurl = "file:///D://vue2//geekbangtrain//maoyan.html"
 
-#html_obj = session.get(f'file:///D://vue2//geekbangtrain//maoyan.html')
+# html_obj = session.get(f'file:///D://vue2//geekbangtrain//maoyan.html')
 html_obj = session.get(
     f'file:///D://vue2//Python001-class01//week01//maoyan.html')
 # print(html_obj.text)
-#response = requests.get(myurl, headers=header)
+# response = requests.get(myurl, headers=header)
 
 # with open('D://vue2//geekbangtrain//maoyan.html', 'r', encoding='utf-8') as f:
 #    print(f.read())
@@ -39,22 +39,27 @@ mylist = []
 # # Python 中使用 for in 形式的循环,Python使用缩进来做语句块分隔
 # # for tags in bs_info.find_all('div', attrs={'class': 'hd'}):
 # for tags in bs_info.find_all('div', attrs={'class': 'movie-item film-channel'}):
-for tags in bs_info.find_all('div', attrs={'class': 'channel-detail movie-item-title'}):
+# for tags in bs_info.find_all('div', attrs={'class': 'channel-detail movie-item-title'}):
+for tags in bs_info.find_all('div', attrs={'class': 'movie-item-hover'}):
+    # for tags in bs_info.find_all('div', attrs={'class': 'movie-hover-info'}):
     # print(tags)
     for atag in tags.find_all('a'):
         # print(atag)
         href = atag.get('href')
-        print(atag.get('href'))
+        print(href)
+        # print(atag.get('href'))
         # 获取所有链接
         atag_name = atag.text
-        print(atag.text)
+        # print(atag.text)
         mylist.append([href, atag_name])
-        # print(atag.find('span').text)
+
+        print(atag.find('span').text)
         # print(atag.find('span'), attrs={'class': 'name'})
         # print(atag.get('span'))
         # 获取电影名字
 # print(mylist)
-movie1 = pd.DataFrame(data=mylist, columns=['链接地址', '电影名'])
+# movie1 = pd.DataFrame(data=mylist, columns=['链接地址', '电影名'])
+movie1 = pd.DataFrame(data=mylist)
 # print(movie1.head())
-#movie1.to_csv('./movie1.csv', encoding='utf8', index=False, header=False)
+# movie1.to_csv('./movie1.csv', encoding='utf8', index=False, header=False)
 movie1.to_csv('./movie1.csv', encoding='utf8', index=True, header=True)
