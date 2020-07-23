@@ -1,5 +1,6 @@
 # 使用BeautifulSoup解析网页
 
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup as bs
 # bs4是第三方库需要使用pip命令安装
@@ -34,6 +35,7 @@ html_obj = session.get(
 bs_info = bs(html_obj.text, 'html.parser')
 # print(bs_info)
 
+mylist = []
 # # Python 中使用 for in 形式的循环,Python使用缩进来做语句块分隔
 # # for tags in bs_info.find_all('div', attrs={'class': 'hd'}):
 # for tags in bs_info.find_all('div', attrs={'class': 'movie-item film-channel'}):
@@ -41,10 +43,18 @@ for tags in bs_info.find_all('div', attrs={'class': 'channel-detail movie-item-t
     # print(tags)
     for atag in tags.find_all('a'):
         # print(atag)
+        href = atag.get('href')
         print(atag.get('href'))
         # 获取所有链接
+        atag_name = atag.text
         print(atag.text)
+        mylist.append([href, atag_name])
         # print(atag.find('span').text)
         # print(atag.find('span'), attrs={'class': 'name'})
         # print(atag.get('span'))
         # 获取电影名字
+# print(mylist)
+movie1 = pd.DataFrame(data=mylist, columns=['链接地址', '电影名'])
+# print(movie1.head())
+#movie1.to_csv('./movie1.csv', encoding='utf8', index=False, header=False)
+movie1.to_csv('./movie1.csv', encoding='utf8', index=True, header=True)
