@@ -13,7 +13,6 @@ session = HTMLSession()
 
 session.mount('file://', FileAdapter())
 
-
 user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
 
 header = {'user-agent': user_agent}
@@ -23,9 +22,13 @@ header = {'user-agent': user_agent}
 myurl = "file:///D://vue2//geekbangtrain//maoyan.html"
 
 # html_obj = session.get(f'file:///D://vue2//geekbangtrain//maoyan.html')
+#html_obj = session.get(
+#    f'file:///D://vue2//Python001-class01//week01//maoyan.html')
 html_obj = session.get(
-    f'file:///D://vue2//Python001-class01//week01//maoyan.html')
-# print(html_obj.text)
+    f'file:///Users/xietao/vue/devops-web/py3/Python001-class01/week01/maoyan.html'
+)
+
+#print(html_obj.text)
 # response = requests.get(myurl, headers=header)
 
 # with open('D://vue2//geekbangtrain//maoyan.html', 'r', encoding='utf-8') as f:
@@ -40,26 +43,41 @@ mylist = []
 # # for tags in bs_info.find_all('div', attrs={'class': 'hd'}):
 # for tags in bs_info.find_all('div', attrs={'class': 'movie-item film-channel'}):
 # for tags in bs_info.find_all('div', attrs={'class': 'channel-detail movie-item-title'}):
-for tags in bs_info.find_all('div', attrs={'class': 'movie-item-hover'}):
-    # for tags in bs_info.find_all('div', attrs={'class': 'movie-hover-info'}):
-    # print(tags)
-    for atag in tags.find_all('a'):
-        # print(atag)
-        href = atag.get('href')
-        print(href)
-        # print(atag.get('href'))
-        # 获取所有链接
-        atag_name = atag.text
-        # print(atag.text)
-        mylist.append([href, atag_name])
+#for tags in bs_info.find_all('div', attrs={'class': 'movie-item-hover'}):
+for tags in bs_info.find_all('div', attrs={'class': 'movie-hover-info'}):
+    #for tags in bs_info.find_all('div', attrs={'class': 'movie-hover-title'}):
+    #print(tags)
+    #btag = (tags.find_all('div', attrs={'class': 'movie-hover-info'}))
+    #print(btag)
+    #print(tags.find('span', attrs={'class': 'hover-tag'}))
+    ctag = tags.find_all('span', attrs={'class': 'hover-tag'})
+    print(ctag[1].text)
+    dtag = tags.find('span').text
+    #print(type(ctag))
+    print(dtag)
 
-        print(atag.find('span').text)
-        # print(atag.find('span'), attrs={'class': 'name'})
-        # print(atag.get('span'))
-        # 获取电影名字
+    #print(ctag.text)
+    # for atag in tags.find_all('a'):
+    #     #print(atag)
+    #     href = atag.get('href')
+    #     print(href)
+    #     # print(atag.get('href'))
+    #     # 获取所有链接
+    #     atag_name = atag.text
+    #     #print(atag_name)
+    #     # print(atag.text)
+    # for btag in tags.find('div', attrs={'class': 'movie-hover-info'}):
+    #     print(btag)
+    #tags.find('span', attrs={'class': 'title'}).text)
+    #mylist.append([href, atag_name])
+
+    #print(atag.find('span').text)
+    #print(atag.find('span'), attrs={'class': 'hove-tag'})
+    # print(atag.get('span'))
+    # 获取电影名字
 # print(mylist)
 # movie1 = pd.DataFrame(data=mylist, columns=['链接地址', '电影名'])
-movie1 = pd.DataFrame(data=mylist)
+#movie1 = pd.DataFrame(data=mylist)
 # print(movie1.head())
 # movie1.to_csv('./movie1.csv', encoding='utf8', index=False, header=False)
-movie1.to_csv('./movie1.csv', encoding='utf8', index=True, header=True)
+#movie1.to_csv('./movie1.csv', encoding='utf8', index=True, header=True)
